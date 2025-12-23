@@ -2,24 +2,33 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  base: '/', // ensures proper paths in production
   plugins: [react()],
   resolve: {
     alias: [
-      // Most specific aliases FIRST (for src/components files)
+      { find: '@', replacement: path.resolve(__dirname, './src') },
+      { find: '@/components', replacement: path.resolve(__dirname, './src/components') },
       { find: '@/components/ui', replacement: path.resolve(__dirname, './src/components/ui') },
       { find: '@/components/SEO', replacement: path.resolve(__dirname, './src/components/SEO') },
       { find: '@/components/ProtectedRoute', replacement: path.resolve(__dirname, './src/components/ProtectedRoute') },
       { find: '@/components/ErrorBoundary', replacement: path.resolve(__dirname, './src/components/ErrorBoundary') },
       { find: '@/components/LoadingSkeleton', replacement: path.resolve(__dirname, './src/components/LoadingSkeleton') },
-      // AdminLogin is in src/components/admin, but other admin components are in Components/admin
       { find: '@/components/admin/AdminLogin', replacement: path.resolve(__dirname, './src/components/admin/AdminLogin') },
-      // General components alias (point to src/components to avoid mixed-case Components folder)
-      { find: '@/components', replacement: path.resolve(__dirname, './src/components') },
-      // Base alias
-      { find: '@', replacement: path.resolve(__dirname, './src') },
     ],
   },
+  build: {
+    chunkSizeWarningLimit: 1000, // Suppress warnings for chunks up to 1MB (adjust as needed)
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom', '@tanstack/react-query'], // Core React libs
+          // In your build.rollupOptions.output.manualChunks
+pdf: ['jspdf', 'html2canvas', 'jspdf-autotable'], // Fixed: Use 'jspdf-autotable' (hyphen, not dot)
+          excel: ['xlsx'], // Excel-related libs
+          // Add more chunks as needed for other heavy dependencies
+        },
+      },
+    },
+  },
 })
-

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   BarChart3, TrendingUp, Users, FileText, Heart, MessageSquare,
-  Calendar
+  Calendar, Loader2  // FIX: Added Loader2 for loading spinner (if not available, use a text placeholder)
 } from 'lucide-react';
 import { analyticsAPI } from '@/api/apiClient';
 import { format, subDays, startOfMonth, endOfMonth } from 'date-fns';
@@ -48,6 +48,16 @@ export default function AnalyticsDashboard() {
   };
 
   const analyticsData = analytics?.data || {};
+
+  // FIX: Show loading state if data is still fetching. This uses `isLoading` to resolve the unused variable error.
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-500" />
+        <span className="ml-2 text-gray-500">Loading analytics...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -197,4 +207,3 @@ export default function AnalyticsDashboard() {
     </div>
   );
 }
-
