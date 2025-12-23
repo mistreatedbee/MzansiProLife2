@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mzansi Prolife Development Institute NPC
 
 A modern web application for the Mzansi Prolife Development Institute NPC, featuring a comprehensive questionnaire system, admin dashboard, and AI-powered chat assistant.
@@ -185,3 +186,7 @@ This project is proprietary software for Mzansi Prolife Development Institute NP
 - File uploads require Base44 file storage integration
 - The chat widget uses Base44's LLM integration
 - All form submissions are stored via Base44 entities
+=======
+# MzansiProLife2
+Version 3
+>>>>>>> 6d3a7bdef8721f994191892d8fd0d1ed99234ee5
