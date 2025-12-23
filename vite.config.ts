@@ -17,6 +17,7 @@ export default defineConfig({
       { find: '@/components/admin/AdminLogin', replacement: path.resolve(__dirname, './src/components/admin/AdminLogin') },
     ],
   },
+<<<<<<< HEAD
   build: {
     chunkSizeWarningLimit: 1000, // Suppress warnings for chunks up to 1MB (adjust as needed)
     rollupOptions: {
@@ -32,3 +33,6 @@ pdf: ['jspdf', 'html2canvas', 'jspdf-autotable'], // Fixed: Use 'jspdf-autotable
     },
   },
 })
+=======
+})
+>>>>>>> 400609311a45e9bc573afd08c06928994abad773
