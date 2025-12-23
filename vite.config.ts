@@ -1,10 +1,9 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: '/', // Ensure correct paths for production
+  base: '/', // ensures proper paths in production
   plugins: [react()],
   resolve: {
     alias: [
@@ -18,4 +17,4 @@ export default defineConfig({
       { find: '@/components/admin/AdminLogin', replacement: path.resolve(__dirname, './src/components/admin/AdminLogin') },
     ],
   },
-});
+})
