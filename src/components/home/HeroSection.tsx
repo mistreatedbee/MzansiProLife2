@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Heart, Sparkles, Target, Shield, Globe, Award, Zap } from 'lucide-react';
+import { ArrowRight, Users, Heart, Sparkles, Target, Shield, Globe, Award, Zap, Building, Users as UsersIcon, Star } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const taglines = [
@@ -18,6 +18,37 @@ const features = [
   { icon: Award, label: "Ubuntu Foundation", color: "text-amber-500" },
 ];
 
+const programCards = [
+  { 
+    icon: Target, 
+    title: "Skills Development", 
+    description: "Building futures through education",
+    color: "from-green-500 to-emerald-600",
+    position: "top"
+  },
+  { 
+    icon: Building, 
+    title: "Community Centres", 
+    description: "Sizanani Help & Support",
+    color: "from-blue-500 to-cyan-600",
+    position: "right"
+  },
+  { 
+    icon: UsersIcon, 
+    title: "Ambassadors", 
+    description: "Life Changers Program",
+    color: "from-purple-500 to-pink-600",
+    position: "bottom"
+  },
+  { 
+    icon: Star, 
+    title: "Youth Programs", 
+    description: "Next Generation Leaders",
+    color: "from-amber-500 to-orange-600",
+    position: "left"
+  },
+];
+
 export default function HeroSection() {
   const [currentTagline, setCurrentTagline] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -29,8 +60,8 @@ export default function HeroSection() {
   const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
   const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
   
-  const rotateX = useTransform(springY, [-0.5, 0.5], [10, -10]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-10, 10]);
+  const rotateX = useTransform(springY, [-0.5, 0.5], [5, -5]);
+  const rotateY = useTransform(springX, [-0.5, 0.5], [-5, 5]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -46,6 +77,21 @@ export default function HeroSection() {
     }, 4000);
     return () => clearInterval(interval);
   }, []);
+
+  const getPositionStyles = (position: string) => {
+    switch(position) {
+      case 'top':
+        return { top: '-20px', left: '50%', transform: 'translateX(-50%)' };
+      case 'right':
+        return { top: '50%', right: '-20px', transform: 'translateY(-50%)' };
+      case 'bottom':
+        return { bottom: '-20px', left: '50%', transform: 'translateX(-50%)' };
+      case 'left':
+        return { top: '50%', left: '-20px', transform: 'translateY(-50%)' };
+      default:
+        return {};
+    }
+  };
 
   return (
     <section 
@@ -246,7 +292,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Logo & Visual Element */}
+          {/* Logo & Visual Element - Square Design */}
           <motion.div
             ref={logoRef}
             style={{
@@ -259,28 +305,29 @@ export default function HeroSection() {
             animate={{ opacity: 1, rotateY: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            {/* Glowing Center */}
-            <div className="relative w-[600px] h-[600px] mx-auto">
-              {/* Outer Rings with Animation */}
+            {/* Main Container */}
+            <div className="relative w-[500px] h-[500px] mx-auto">
+              {/* Animated Border */}
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border border-green-500/20 rounded-full"
+                animate={{ 
+                  rotate: 360,
+                }}
+                transition={{ 
+                  duration: 30, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }}
+                className="absolute inset-0 rounded-3xl border border-green-500/20"
               />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-10 border border-emerald-400/30 rounded-full"
-              />
-              
-              {/* Main Logo Container */}
+
+              {/* Glowing Background Square */}
               <motion.div
                 animate={{ 
                   scale: [1, 1.02, 1],
                   boxShadow: [
-                    "0 0 40px rgba(34, 197, 94, 0.2)",
-                    "0 0 80px rgba(34, 197, 94, 0.4)",
-                    "0 0 40px rgba(34, 197, 94, 0.2)"
+                    "0 0 60px rgba(34, 197, 94, 0.2)",
+                    "0 0 100px rgba(34, 197, 94, 0.3)",
+                    "0 0 60px rgba(34, 197, 94, 0.2)"
                   ]
                 }}
                 transition={{ 
@@ -288,126 +335,163 @@ export default function HeroSection() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute inset-20 bg-gradient-to-br from-green-600 via-emerald-500 to-green-700 rounded-full shadow-2xl overflow-hidden"
-                style={{ transform: "translateZ(50px)" }}
+                className="absolute inset-8 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl overflow-hidden"
               >
-                {/* Logo with Glow Effect */}
-                <div className="absolute inset-0 flex items-center justify-center p-16">
-                  <div className="relative w-full h-full">
-                    {/* Logo Background Pattern */}
-                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,#ffffff_1px,transparent_1px)] bg-[size:20px_20px]" />
-                    
-                    {/* Logo Image Container */}
+                {/* Inner Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-green-900/10 to-emerald-900/5" />
+                
+                {/* Grid Pattern */}
+                <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+                {/* Logo Container */}
+                <div className="absolute inset-12 rounded-xl overflow-hidden bg-gradient-to-br from-green-600/20 to-emerald-600/10 backdrop-blur-sm">
+                  <div className="absolute inset-0 flex items-center justify-center p-8">
+                    {/* Logo with Enhanced Effects */}
                     <motion.div
                       animate={{ 
-                        rotate: [0, 5, 0, -5, 0],
+                        scale: [1, 1.05, 1],
+                        rotate: [0, 1, 0, -1, 0],
                       }}
                       transition={{ 
-                        duration: 10, 
+                        duration: 8,
                         repeat: Infinity,
                         ease: "easeInOut"
                       }}
-                      className="relative w-full h-full"
+                      className="relative w-full h-full rounded-lg overflow-hidden border border-white/10 bg-gradient-to-br from-green-700/30 to-emerald-800/20"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-full" />
                       <img
                         src="/logo.jpeg"
                         alt="Mzansi Prolife Development Institute Logo"
-                        className="w-full h-full object-contain p-8 rounded-full"
+                        className="w-full h-full object-contain p-6"
+                      />
+                      
+                      {/* Logo Glow Effect */}
+                      <motion.div
+                        animate={{ 
+                          opacity: [0.3, 0.6, 0.3],
+                        }}
+                        transition={{ 
+                          duration: 3,
+                          repeat: Infinity 
+                        }}
+                        className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg blur-xl"
                       />
                     </motion.div>
-                    
-                    {/* Glow Effect */}
-                    <motion.div
-                      animate={{ 
-                        opacity: [0.3, 0.6, 0.3],
-                      }}
-                      transition={{ 
-                        duration: 3,
-                        repeat: Infinity 
-                      }}
-                      className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 rounded-full blur-xl"
-                    />
                   </div>
+
+                  {/* Corner Accents */}
+                  <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-green-500/50 rounded-tl-lg" />
+                  <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-green-500/50 rounded-tr-lg" />
+                  <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-green-500/50 rounded-bl-lg" />
+                  <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-green-500/50 rounded-br-lg" />
                 </div>
 
-                {/* Floating Elements */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.8, type: "spring" }}
-                  className="absolute -top-6 left-1/2 -translate-x-1/2"
-                >
-                  <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full shadow-lg backdrop-blur-sm border border-white/20">
-                    <div className="flex items-center gap-2">
-                      <Target className="w-4 h-4" />
-                      <span className="font-semibold text-sm">Skills Development</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.9, type: "spring" }}
-                  className="absolute bottom-10 -left-6"
-                >
-                  <div className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-6 py-3 rounded-full shadow-lg backdrop-blur-sm border border-white/20">
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      <span className="font-semibold text-sm">Community Centres</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 1, type: "spring" }}
-                  className="absolute bottom-10 -right-6"
-                >
-                  <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-6 py-3 rounded-full shadow-lg backdrop-blur-sm border border-white/20">
-                    <div className="flex items-center gap-2">
-                      <Award className="w-4 h-4" />
-                      <span className="font-semibold text-sm">Ambassadors Program</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Rotating Orbital Elements */}
-                {[0, 120, 240].map((angle, index) => (
+                {/* Floating Particles Inside */}
+                {[...Array(8)].map((_, i) => (
                   <motion.div
-                    key={index}
-                    className="absolute top-1/2 left-1/2 w-24 h-24"
-                    animate={{ rotate: 360 }}
-                    transition={{ 
-                      duration: 20 + index * 5,
+                    key={i}
+                    className="absolute w-2 h-2 bg-green-400/20 rounded-full"
+                    initial={{
+                      x: Math.random() * 300 + 100,
+                      y: Math.random() * 300 + 100,
+                    }}
+                    animate={{
+                      x: [null, Math.random() * 300 + 100],
+                      y: [null, Math.random() * 300 + 100],
+                    }}
+                    transition={{
+                      duration: Math.random() * 4 + 3,
                       repeat: Infinity,
-                      ease: "linear"
+                      repeatType: "reverse",
+                      ease: "linear",
                     }}
-                    style={{ 
-                      transformOrigin: 'center',
-                      marginLeft: '-48px',
-                      marginTop: '-48px',
-                    }}
-                  >
-                    <div 
-                      className="w-12 h-12 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full border border-white/10 backdrop-blur-sm flex items-center justify-center"
-                      style={{
-                        transform: `rotate(${-angle}deg) translateX(200px) rotate(${angle}deg)`
-                      }}
-                    >
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                        className="w-8 h-8"
-                      >
-                        <Sparkles className="w-4 h-4 text-green-300" />
-                      </motion.div>
-                    </div>
-                  </motion.div>
+                  />
                 ))}
               </motion.div>
+
+              {/* Program Cards Around Square */}
+              {programCards.map((program, index) => {
+                const Icon = program.icon;
+                const position = getPositionStyles(program.position);
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ 
+                      delay: 0.8 + index * 0.1, 
+                      type: "spring",
+                      stiffness: 200
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      y: program.position === 'top' ? -5 : program.position === 'bottom' ? 5 : 0,
+                      x: program.position === 'left' ? -5 : program.position === 'right' ? 5 : 0,
+                    }}
+                    className="absolute z-20"
+                    style={position}
+                  >
+                    <div className={`bg-gradient-to-r ${program.color} text-white px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 min-w-[180px]`}>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 bg-white/20 rounded-lg">
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="font-bold text-sm">{program.title}</span>
+                      </div>
+                      <p className="text-xs opacity-80">{program.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+
+              {/* Animated Connector Lines */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                {programCards.map((program, index) => {
+                  const getLineCoords = () => {
+                    const centerX = 250;
+                    const centerY = 250;
+                    const offset = 180;
+                    
+                    switch(program.position) {
+                      case 'top':
+                        return { x1: centerX, y1: centerY - 80, x2: centerX, y2: centerY - offset };
+                      case 'right':
+                        return { x1: centerX + 80, y1: centerY, x2: centerX + offset, y2: centerY };
+                      case 'bottom':
+                        return { x1: centerX, y1: centerY + 80, x2: centerX, y2: centerY + offset };
+                      case 'left':
+                        return { x1: centerX - 80, y1: centerY, x2: centerX - offset, y2: centerY };
+                      default:
+                        return { x1: 0, y1: 0, x2: 0, y2: 0 };
+                    }
+                  };
+                  
+                  const coords = getLineCoords();
+                  
+                  return (
+                    <motion.line
+                      key={index}
+                      x1={coords.x1}
+                      y1={coords.y1}
+                      x2={coords.x2}
+                      y2={coords.y2}
+                      stroke="url(#gradient)"
+                      strokeWidth="2"
+                      strokeDasharray="5,5"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ delay: 0.5 + index * 0.1, duration: 1 }}
+                    />
+                  );
+                })}
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#34d399" stopOpacity="0.5" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
           </motion.div>
         </div>
