@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, Users, Heart, Sparkles, Target, Shield, Globe, Award, Zap } from 'lucide-react';
+import { ArrowRight, Users, Heart, Sparkles, Target, Shield, Globe, Award, Zap } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const taglines = [
@@ -20,9 +20,8 @@ const features = [
 
 export default function HeroSection() {
   const [currentTagline, setCurrentTagline] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
-  const logoRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
 
   // Mouse parallax effect
   const mouseX = useMotionValue(0);
@@ -33,7 +32,7 @@ export default function HeroSection() {
   const rotateX = useTransform(springY, [-0.5, 0.5], [10, -10]);
   const rotateY = useTransform(springX, [-0.5, 0.5], [-10, 10]);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - left) / width - 0.5;
     const y = (e.clientY - top) / height - 0.5;
