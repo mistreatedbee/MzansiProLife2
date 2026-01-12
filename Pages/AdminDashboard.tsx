@@ -282,9 +282,18 @@ export default function AdminDashboard() {
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-sm text-gray-500">Mzansi Prolife Development Institute</p>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-md">
+              <img 
+                src="/logo.jpeg" 
+                alt="Mzansi Prolife Development Institute NPC" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+              <p className="text-sm text-gray-500">Mzansi Prolife Development Institute</p>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <Badge variant="outline" className="text-green-600 border-green-200">

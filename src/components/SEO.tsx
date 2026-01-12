@@ -13,7 +13,7 @@ export default function SEO({
   title = 'Mzansi Prolife Development Institute NPC - Empowering Communities',
   description = 'Mzansi Prolife Development Institute NPC enables and improves the lives of ordinary citizens of South Africa to achieve extraordinary outcomes through community empowerment, skills development, and social change.',
   keywords = 'Mzansi Prolife, Development Institute, NPC, South Africa, Community Development, Skills Development, Social Change, Non-Profit',
-  image = '/og-image.jpg',
+  image = '/logo.jpeg',
   url = 'https://mzansiprolife.org',
   type = 'website',
 }: SEOProps) {

@@ -99,8 +99,12 @@ export default function Header() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to={createPageUrl('Home')} className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-700 rounded-2xl flex items-center justify-center shadow-lg">
-                <Heart className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-2xl shadow-lg overflow-hidden">
+                <img 
+                  src="/logo.jpeg" 
+                  alt="Mzansi Prolife Development Institute NPC" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="hidden sm:block">
                 <h1 className="font-bold text-gray-800 text-lg leading-tight">Mzansi Prolife</h1>
@@ -162,6 +166,20 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
                 <div className="flex flex-col h-full pt-8">
+                  {/* Mobile Menu Logo */}
+                  <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-200">
+                    <div className="w-12 h-12 rounded-xl shadow-lg overflow-hidden">
+                      <img 
+                        src="/logo.jpeg" 
+                        alt="Mzansi Prolife Development Institute NPC" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-800 text-base leading-tight">Mzansi Prolife</h3>
+                      <p className="text-xs text-gray-500">Development Institute NPC</p>
+                    </div>
+                  </div>
                   <nav className="flex flex-col gap-2">
                     {navItems.map((item) => (
                       <Link

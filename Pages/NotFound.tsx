@@ -19,6 +19,16 @@ export default function NotFound() {
           transition={{ delay: 0.2 }}
           className="mb-8"
         >
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-xl">
+              <img 
+                src="/logo.jpeg" 
+                alt="Mzansi Prolife Development Institute NPC" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
           <h1 className="text-9xl font-bold text-green-600 mb-4">404</h1>
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Page Not Found</h2>
           <p className="text-xl text-gray-600 mb-8">

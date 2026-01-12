@@ -102,8 +102,12 @@ export default function ForgotPassword() {
         <Card className="shadow-2xl border-0">
           <CardHeader className="text-center space-y-4 pb-6">
             <div className="flex justify-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-2xl flex items-center justify-center shadow-lg">
-                <Heart className="w-8 h-8 text-white" />
+              <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-lg">
+                <img 
+                  src="/logo.jpeg" 
+                  alt="Mzansi Prolife Development Institute NPC" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             <div>

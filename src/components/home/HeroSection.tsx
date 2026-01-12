@@ -132,21 +132,46 @@ export default function HeroSection() {
             <div className="relative">
               {/* Main Circle */}
               <div className="w-[450px] h-[450px] mx-auto relative">
-                {/* Outer Ring */}
-                <div className="absolute inset-0 border-2 border-green-200 rounded-full" />
-                <div className="absolute inset-4 border border-green-100 rounded-full" />
+                {/* Outer Ring with Animation */}
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 border-2 border-green-200 rounded-full"
+                />
+                <motion.div 
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-4 border border-green-100 rounded-full"
+                />
                 
-                {/* Center Image */}
-                <div className="absolute inset-8 bg-gradient-to-br from-green-500 to-green-700 rounded-full shadow-2xl shadow-green-600/30 overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80"
-                    alt="Community empowerment"
-                    className="w-full h-full object-cover mix-blend-overlay opacity-60"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Heart className="w-24 h-24 text-white/90" />
+                {/* Center Image with Logo */}
+                <motion.div 
+                  animate={{ 
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute inset-8 bg-gradient-to-br from-green-500 to-green-700 rounded-full shadow-2xl shadow-green-600/30 overflow-hidden"
+                >
+                  <div className="absolute inset-0 flex items-center justify-center p-12">
+                    <motion.img 
+                      src="/logo.jpeg"
+                      alt="Mzansi Prolife Development Institute Logo"
+                      className="w-full h-full object-contain rounded-full"
+                      animate={{ 
+                        rotate: [0, 5, 0, -5, 0],
+                      }}
+                      transition={{ 
+                        duration: 5, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Floating Cards */}
                 <motion.div 

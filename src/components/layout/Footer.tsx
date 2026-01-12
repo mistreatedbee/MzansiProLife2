@@ -37,8 +37,12 @@ export default function Footer() {
           {/* About Column */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-700 rounded-2xl flex items-center justify-center">
-                <Heart className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg">
+                <img 
+                  src="/logo.jpeg" 
+                  alt="Mzansi Prolife Development Institute NPC" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-lg">Mzansi Prolife</h3>
