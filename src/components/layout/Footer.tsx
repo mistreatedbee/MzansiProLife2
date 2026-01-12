@@ -1,7 +1,7 @@
 // React default import removed (using automatic JSX runtime)
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { Heart, Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
   const phoneNumbers = [

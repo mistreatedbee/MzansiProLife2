@@ -5,7 +5,7 @@ import { Input } from "../src/components/ui/input";
 import { Label } from "../src/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../src/components/ui/card";
 import { Checkbox } from "../src/components/ui/checkbox";
-import { Loader2, Mail, Lock, User, Phone, Heart, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Loader2, Mail, Lock, User, Phone, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import SEO from '../src/components/SEO';

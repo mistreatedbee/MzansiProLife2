@@ -4,7 +4,7 @@ import { Button } from "../src/components/ui/button";
 import { Input } from "../src/components/ui/input";
 import { Label } from "../src/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../src/components/ui/card";
-import { Loader2, Mail, Lock, Heart, ArrowLeft } from 'lucide-react';
+import { Loader2, Mail, Lock, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import SEO from '../src/components/SEO';

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Phone, Mail, Heart, User } from 'lucide-react';
+import { Menu, Phone, Mail, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const taglines = [
