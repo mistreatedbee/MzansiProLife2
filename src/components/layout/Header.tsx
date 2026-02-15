@@ -113,6 +113,13 @@ export default function Header() {
               </Link>
               {isAuthenticated ? (
                 <>
+                  {user?.role === 'admin' && (
+                    <Link to="/admin">
+                      <Button variant="outline" className="rounded-full border-green-300 text-green-700">
+                        Admin Dashboard
+                      </Button>
+                    </Link>
+                  )}
                   <Link to="/profile">
                     <Button variant="outline" className="rounded-full border-gray-300">
                       <User className="w-4 h-4 mr-2" />
@@ -178,12 +185,21 @@ export default function Header() {
                       </Button>
                     </Link>
                     {isAuthenticated ? (
-                      <Link to="/profile" onClick={() => setMobileOpen(false)}>
-                        <Button variant="outline" className="w-full rounded-full">
-                          <User className="w-4 h-4 mr-2" />
-                          My Profile
-                        </Button>
-                      </Link>
+                      <>
+                        {user?.role === 'admin' && (
+                          <Link to="/admin" onClick={() => setMobileOpen(false)}>
+                            <Button variant="outline" className="w-full rounded-full border-green-300 text-green-700">
+                              Admin Dashboard
+                            </Button>
+                          </Link>
+                        )}
+                        <Link to="/profile" onClick={() => setMobileOpen(false)}>
+                          <Button variant="outline" className="w-full rounded-full">
+                            <User className="w-4 h-4 mr-2" />
+                            My Profile
+                          </Button>
+                        </Link>
+                      </>
                     ) : (
                       <>
                         <Link to="/login" onClick={() => setMobileOpen(false)}>
