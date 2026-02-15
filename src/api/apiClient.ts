@@ -3,7 +3,16 @@
  * Replaces the Base44 mock client with real backend API calls
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const resolveApiBaseUrl = () => {
+  const configuredBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  const trimmed = configuredBase.replace(/\/+$/, '');
+  if (trimmed.endsWith('/api')) {
+    return trimmed;
+  }
+  return `${trimmed}/api`;
+};
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 // Get auth token from localStorage
 const getToken = (): string | null => {
