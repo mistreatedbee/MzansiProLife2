@@ -15,7 +15,7 @@ import { contentAPI } from '@/api/apiClient';
 
 export default function ContentManagement() {
   const [selectedContent, setSelectedContent] = useState<any>(null);
-  const [isEditing, setIsEditing] = useState(false);
+  const [dialogMode, setDialogMode] = useState<'create' | 'edit' | 'view' | null>(null);
   const [contentData, setContentData] = useState<any>({});
   const queryClient = useQueryClient();
 
@@ -29,7 +29,17 @@ export default function ContentManagement() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['content'] });
       toast.success('Content updated successfully');
-      setIsEditing(false);
+      setDialogMode(null);
+      setSelectedContent(null);
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: (data: any) => contentAPI.create(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['content'] });
+      toast.success('Content created successfully');
+      setDialogMode(null);
       setSelectedContent(null);
     },
   });
@@ -45,11 +55,38 @@ export default function ContentManagement() {
       content: typeof content.content === 'string' ? content.content : JSON.stringify(content.content, null, 2),
       isPublished: content.isPublished
     });
-    setIsEditing(true);
+    setDialogMode('edit');
+  };
+
+  const handleView = (content: any) => {
+    setSelectedContent(content);
+    setContentData({
+      title: content.title,
+      content: typeof content.content === 'string' ? content.content : JSON.stringify(content.content, null, 2),
+      isPublished: content.isPublished
+    });
+    setDialogMode('view');
+  };
+
+  const handleCreate = () => {
+    setSelectedContent(null);
+    setContentData({
+      key: '',
+      type: 'page',
+      title: '',
+      content: '',
+      isPublished: false,
+    });
+    setDialogMode('create');
   };
 
   const handleSave = () => {
-    if (selectedContent) {
+    if (dialogMode === 'create') {
+      createMutation.mutate(contentData);
+      return;
+    }
+
+    if (selectedContent && dialogMode === 'edit') {
       updateMutation.mutate({
         id: selectedContent._id || selectedContent.id,
         data: contentData
@@ -61,7 +98,7 @@ export default function ContentManagement() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Content Management</h2>
-        <Button className="bg-green-600 hover:bg-green-700 rounded-xl">
+        <Button className="bg-green-600 hover:bg-green-700 rounded-xl" onClick={handleCreate}>
           <Plus className="w-4 h-4 mr-2" />
           Add Content
         </Button>
@@ -111,6 +148,7 @@ export default function ContentManagement() {
                     variant="outline"
                     size="sm"
                     className="rounded-xl"
+                    onClick={() => handleView(content)}
                   >
                     <Eye className="w-4 h-4" />
                   </Button>
@@ -122,18 +160,41 @@ export default function ContentManagement() {
       </div>
 
       {/* Edit Dialog */}
-      <Dialog open={isEditing} onOpenChange={setIsEditing}>
+      <Dialog open={dialogMode !== null} onOpenChange={(open) => !open && setDialogMode(null)}>
         <DialogContent className="max-w-3xl max-h-[90vh]">
           <DialogHeader>
-            <DialogTitle>Edit Content: {selectedContent?.key}</DialogTitle>
+            <DialogTitle>
+              {dialogMode === 'create' ? 'Create Content' : dialogMode === 'view' ? 'View Content' : `Edit Content: ${selectedContent?.key}`}
+            </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
+            {dialogMode === 'create' && (
+              <>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Key</label>
+                  <Input
+                    value={contentData.key || ''}
+                    onChange={(e) => setContentData({ ...contentData, key: e.target.value })}
+                    className="rounded-xl"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Type</label>
+                  <Input
+                    value={contentData.type || ''}
+                    onChange={(e) => setContentData({ ...contentData, type: e.target.value })}
+                    className="rounded-xl"
+                  />
+                </div>
+              </>
+            )}
             <div>
               <label className="text-sm font-medium mb-2 block">Title</label>
               <Input
                 value={contentData.title || ''}
                 onChange={(e) => setContentData({ ...contentData, title: e.target.value })}
                 className="rounded-xl"
+                disabled={dialogMode === 'view'}
               />
             </div>
             <div>
@@ -143,6 +204,7 @@ export default function ContentManagement() {
                 onChange={(e) => setContentData({ ...contentData, content: e.target.value })}
                 rows={10}
                 className="rounded-xl font-mono text-sm"
+                disabled={dialogMode === 'view'}
               />
             </div>
             <div className="flex items-center gap-2">
@@ -152,21 +214,24 @@ export default function ContentManagement() {
                 checked={contentData.isPublished}
                 onChange={(e) => setContentData({ ...contentData, isPublished: e.target.checked })}
                 className="rounded"
+                disabled={dialogMode === 'view'}
               />
               <label htmlFor="published" className="text-sm">Published</label>
             </div>
             <div className="flex gap-2">
-              <Button
-                onClick={handleSave}
-                className="bg-green-600 hover:bg-green-700 rounded-xl flex-1"
-                disabled={updateMutation.isPending}
-              >
-                <Save className="w-4 h-4 mr-2" />
-                Save Changes
-              </Button>
+              {dialogMode !== 'view' && (
+                <Button
+                  onClick={handleSave}
+                  className="bg-green-600 hover:bg-green-700 rounded-xl flex-1"
+                  disabled={updateMutation.isPending || createMutation.isPending}
+                >
+                  <Save className="w-4 h-4 mr-2" />
+                  {dialogMode === 'create' ? 'Create Content' : 'Save Changes'}
+                </Button>
+              )}
               <Button
                 variant="outline"
-                onClick={() => setIsEditing(false)}
+                onClick={() => setDialogMode(null)}
                 className="rounded-xl"
               >
                 <X className="w-4 h-4 mr-2" />

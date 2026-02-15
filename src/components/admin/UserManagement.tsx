@@ -29,6 +29,12 @@ export default function UserManagement() {
     }),
   });
 
+  const { data: activityData, isLoading: activityLoading } = useQuery({
+    queryKey: ['userActivity', selectedUser?._id || selectedUser?.id],
+    queryFn: () => usersAPI.getActivity(selectedUser._id || selectedUser.id),
+    enabled: !!selectedUser,
+  });
+
   const updateMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: any }) => usersAPI.update(id, data),
     onSuccess: () => {
@@ -62,7 +68,7 @@ export default function UserManagement() {
     }
   };
 
-  const users = data?.data?.users || [];
+  const users = data?.users || [];
 
   return (
     <div className="space-y-6">
@@ -93,7 +99,7 @@ export default function UserManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Users className="w-5 h-5" />
-            Users ({data?.total || 0})
+            Users ({data?.total || users.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -217,17 +223,29 @@ export default function UserManagement() {
                   <p className="font-semibold">{selectedUser.submissionCount || 0}</p>
                 </div>
               </div>
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => {
-                  // Navigate to user activity
-                  window.location.href = `/admin/users/${selectedUser._id || selectedUser.id}/activity`;
-                }}
-              >
-                <Activity className="w-4 h-4 mr-2" />
-                View Activity Log
-              </Button>
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <Activity className="w-4 h-4" />
+                Activity Log
+              </div>
+              <div className="border rounded-xl p-3 bg-gray-50">
+                <p className="text-sm font-medium mb-2">Recent Activity</p>
+                {activityLoading ? (
+                  <p className="text-sm text-gray-500">Loading activity...</p>
+                ) : (activityData?.activities || []).length === 0 ? (
+                  <p className="text-sm text-gray-500">No recent activity found.</p>
+                ) : (
+                  <div className="space-y-2 max-h-48 overflow-auto">
+                    {(activityData.activities || []).map((activity: any) => (
+                      <div key={activity._id || activity.id} className="text-sm border-b pb-1">
+                        <p className="font-medium">{activity.action} {activity.entity}</p>
+                        <p className="text-gray-500">
+                          {format(new Date(activity.timestamp), 'MMM dd, yyyy HH:mm')}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </DialogContent>

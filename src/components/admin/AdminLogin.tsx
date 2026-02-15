@@ -21,9 +21,6 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
     setIsLoading(true);
 
     try {
-      // TODO: Replace with actual authentication
-      // For now, using simple validation
-      // In production, this should call your authentication API
       if (!email || !password) {
         setError('Please enter both email and password');
         setIsLoading(false);

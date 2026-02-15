@@ -47,7 +47,7 @@ export default function AnalyticsDashboard() {
     }
   };
 
-  const analyticsData = analytics?.data || {};
+  const analyticsData = analytics || {};
 
   // FIX: Show loading state if data is still fetching. This uses `isLoading` to resolve the unused variable error.
   if (isLoading) {

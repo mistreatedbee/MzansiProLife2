@@ -48,7 +48,7 @@ export default function CommunicationCenter() {
     sendMutation.mutate(formData);
   };
 
-  const communications = data?.data?.communications || [];
+  const communications = data?.communications || [];
 
   const getStatusIcon = (status: string) => {
     switch (status) {

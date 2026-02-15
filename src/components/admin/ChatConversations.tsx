@@ -38,10 +38,7 @@ export default function ChatConversations() {
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['admin', 'conversations'],
-    queryFn: async () => {
-      const response = await adminAPI.getConversations();
-      return response.conversations || [];
-    },
+    queryFn: () => adminAPI.getConversations(),
   });
 
   const conversations: Conversation[] = data || [];
@@ -52,9 +49,11 @@ export default function ChatConversations() {
       conv.user_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       conv.user_phone?.includes(searchTerm) ||
       conv.user_email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      conv.session_id.includes(searchTerm);
+      conv.session_id?.includes(searchTerm);
     
-    const matchesStatus = statusFilter === 'all' || conv.status === statusFilter;
+    const matchesStatus =
+      statusFilter === 'all' ||
+      (statusFilter === 'escalated' ? conv.escalated : conv.status === statusFilter);
     
     return matchesSearch && matchesStatus;
   });

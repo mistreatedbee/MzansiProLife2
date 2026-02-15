@@ -11,6 +11,7 @@ import {
 import { securityAPI } from '@/api/apiClient';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
+import { exportToCSV } from '@/utils/export';
 
 export default function SecurityCompliance() {
   const [auditFilters, setAuditFilters] = useState({
@@ -37,12 +38,25 @@ export default function SecurityCompliance() {
   });
 
   const handleExportAuditLogs = () => {
-    // Export audit logs
-    toast.success('Audit logs export ready');
+    if (logs.length === 0) {
+      toast.error('No audit logs to export');
+      return;
+    }
+    const data = logs.map((log: any) => ({
+      Action: log.action,
+      Entity: log.entity,
+      EntityId: log.entityId || '',
+      User: log.user?.name || 'System',
+      Timestamp: log.timestamp ? format(new Date(log.timestamp), 'yyyy-MM-dd HH:mm:ss') : '',
+      IPAddress: log.ipAddress || '',
+      UserAgent: log.userAgent || '',
+    }));
+    exportToCSV(data, `audit_logs_${format(new Date(), 'yyyy-MM-dd')}.csv`);
+    toast.success('Audit logs exported');
   };
 
-  const logs = auditLogs?.data?.logs || [];
-  const complianceData = compliance?.data || {};
+  const logs = auditLogs?.logs || [];
+  const complianceData = compliance || {};
 
   return (
     <div className="space-y-6">

@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { adminAPI } from '@/api/apiClient';
-import { format } from 'date-fns';
+import { format, startOfDay, endOfDay, subDays, startOfMonth } from 'date-fns';
 import { exportToCSV, exportToExcel, exportToPDF, formatSubmissionsForExport } from '@/utils/export';
 
 export default function DonationManagement() {
@@ -27,11 +27,24 @@ export default function DonationManagement() {
   const { data, isLoading } = useQuery({
     queryKey: ['donations', searchTerm, projectFilter, verifiedFilter, dateRange, startDate, endDate],
     queryFn: () => adminAPI.getDonations({
-      search: searchTerm || undefined,
       project: projectFilter !== 'all' ? projectFilter : undefined,
       verified: verifiedFilter !== 'all' ? verifiedFilter : undefined,
-      startDate: dateRange === 'custom' && startDate ? startDate : undefined,
-      endDate: dateRange === 'custom' && endDate ? endDate : undefined,
+      startDate:
+        dateRange === 'custom' && startDate
+          ? startDate
+          : dateRange === 'today'
+            ? format(startOfDay(new Date()), 'yyyy-MM-dd')
+            : dateRange === 'this_week'
+              ? format(startOfDay(subDays(new Date(), 7)), 'yyyy-MM-dd')
+              : dateRange === 'this_month'
+                ? format(startOfMonth(new Date()), 'yyyy-MM-dd')
+                : undefined,
+      endDate:
+        dateRange === 'custom' && endDate
+          ? endDate
+          : dateRange !== 'all'
+            ? format(endOfDay(new Date()), 'yyyy-MM-dd')
+            : undefined,
       limit: 100
     }),
   });
@@ -46,22 +59,31 @@ export default function DonationManagement() {
   });
 
   const handleExport = (exportFormat: 'csv' | 'excel' | 'pdf') => {
-    const donations = data?.data?.donations || [];
-    const exportData = formatSubmissionsForExport(donations);
+    const exportData = formatSubmissionsForExport(filteredDonations);
     const filename = `donations_${format(new Date(), 'yyyy-MM-dd')}`;
     
     if (exportFormat === 'csv') {
-      exportToCSV(exportData, filename);
+      exportToCSV(exportData, `${filename}.csv`);
     } else if (exportFormat === 'excel') {
-      exportToExcel(exportData, filename);
+      exportToExcel(exportData, `${filename}.xlsx`);
     } else if (exportFormat === 'pdf') {
-      exportToPDF(exportData, filename, 'Donations Report');
+      exportToPDF(exportData, `${filename}.pdf`, 'Donations Report');
     }
     toast.success(`Exported as ${exportFormat.toUpperCase()}`);
   };
 
-  const donations = data?.data?.donations || [];
+  const donations = data?.donations || [];
   const totals = data?.totals || { totalAmount: 0, count: 0, average: 0 };
+  const filteredDonations = donations.filter((donation: any) => {
+    if (!searchTerm) return true;
+    const q = searchTerm.toLowerCase();
+    return (
+      donation.full_name?.toLowerCase().includes(q) ||
+      donation.email?.toLowerCase().includes(q) ||
+      donation.reference_number?.toLowerCase().includes(q) ||
+      donation.phone?.toLowerCase().includes(q)
+    );
+  });
 
   return (
     <div className="space-y-6">
@@ -175,17 +197,17 @@ export default function DonationManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Heart className="w-5 h-5" />
-            Donations ({data?.total || 0})
+            Donations ({filteredDonations.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
           {isLoading ? (
             <div className="text-center py-12">Loading donations...</div>
-          ) : donations.length === 0 ? (
+          ) : filteredDonations.length === 0 ? (
             <div className="text-center py-12 text-gray-500">No donations found</div>
           ) : (
             <div className="space-y-3">
-              {donations.map((donation: any) => (
+              {filteredDonations.map((donation: any) => (
                 <div
                   key={donation._id || donation.id}
                   className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow"

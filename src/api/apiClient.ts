@@ -25,16 +25,7 @@ async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const token = getToken();
-  
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    ...options.headers,
-  };
-
-  if (token) {
-    (headers as any)['Authorization'] = `Bearer ${token}`;
-  }
+  const headers = buildAuthHeaders(options.headers);
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...options,
@@ -48,6 +39,39 @@ async function apiRequest<T>(
 
   const data = await response.json();
   return data.data || data;
+}
+
+async function apiRequestFull<T>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const headers = buildAuthHeaders(options.headers);
+
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    ...options,
+    headers,
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ message: 'Request failed' }));
+    throw new Error(error.message || `HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function buildAuthHeaders(customHeaders?: HeadersInit): HeadersInit {
+  const token = getToken();
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+    ...(customHeaders || {}),
+  };
+
+  if (token) {
+    (headers as any).Authorization = `Bearer ${token}`;
+  }
+
+  return headers;
 }
 
 // Auth API
@@ -148,7 +172,11 @@ export const adminAPI = {
       });
     }
     const queryString = params.toString();
-    return apiRequest<any>(`/admin/submissions${queryString ? `?${queryString}` : ''}`);
+    const response = await apiRequestFull<any>(`/admin/submissions${queryString ? `?${queryString}` : ''}`);
+    return {
+      ...response,
+      submissions: response?.data?.submissions || [],
+    };
   },
 
   getSubmission: async (id: string) => {
@@ -183,7 +211,11 @@ export const adminAPI = {
       });
     }
     const queryString = params.toString();
-    return apiRequest<any>(`/admin/donations${queryString ? `?${queryString}` : ''}`);
+    const response = await apiRequestFull<any>(`/admin/donations${queryString ? `?${queryString}` : ''}`);
+    return {
+      ...response,
+      donations: response?.data?.donations || [],
+    };
   },
 
   verifyDonation: async (id: string) => {
@@ -240,7 +272,11 @@ export const usersAPI = {
       });
     }
     const queryString = params.toString();
-    return apiRequest<any>(`/users${queryString ? `?${queryString}` : ''}`);
+    const response = await apiRequestFull<any>(`/users${queryString ? `?${queryString}` : ''}`);
+    return {
+      ...response,
+      users: response?.data?.users || [],
+    };
   },
 
   get: async (id: string) => {
@@ -369,7 +405,11 @@ export const communicationsAPI = {
       });
     }
     const queryString = params.toString();
-    return apiRequest<any>(`/communications${queryString ? `?${queryString}` : ''}`);
+    const response = await apiRequestFull<any>(`/communications${queryString ? `?${queryString}` : ''}`);
+    return {
+      ...response,
+      communications: response?.data?.communications || [],
+    };
   },
 
   get: async (id: string) => {
@@ -399,7 +439,11 @@ export const securityAPI = {
       });
     }
     const queryString = params.toString();
-    return apiRequest<any>(`/security/audit-logs${queryString ? `?${queryString}` : ''}`);
+    const response = await apiRequestFull<any>(`/security/audit-logs${queryString ? `?${queryString}` : ''}`);
+    return {
+      ...response,
+      logs: response?.data?.logs || [],
+    };
   },
 
   getCompliance: async () => {
