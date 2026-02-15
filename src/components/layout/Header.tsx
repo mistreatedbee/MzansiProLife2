@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Phone, Mail, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '@/contexts/AuthContext';
 
 const taglines = [
   "Driving innovation for a sustainable future for all",
@@ -16,8 +17,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentTagline, setCurrentTagline] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userName, setUserName] = useState('');
+  const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -30,27 +30,6 @@ export default function Header() {
       setCurrentTagline((prev) => (prev + 1) % taglines.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    // Check authentication status
-    const checkAuth = () => {
-      const auth = localStorage.getItem('user_authenticated');
-      const name = localStorage.getItem('user_name');
-      setIsAuthenticated(auth === 'true');
-      setUserName(name || '');
-    };
-    
-    checkAuth();
-    // Listen for storage changes (when user logs in/out in another tab)
-    window.addEventListener('storage', checkAuth);
-    // Also check periodically
-    const interval = setInterval(checkAuth, 1000);
-    
-    return () => {
-      window.removeEventListener('storage', checkAuth);
-      clearInterval(interval);
-    };
   }, []);
 
   const navItems = [
@@ -137,7 +116,7 @@ export default function Header() {
                   <Link to="/profile">
                     <Button variant="outline" className="rounded-full border-gray-300">
                       <User className="w-4 h-4 mr-2" />
-                      {userName || 'Profile'}
+                      {user?.name || 'Profile'}
                     </Button>
                   </Link>
                 </>

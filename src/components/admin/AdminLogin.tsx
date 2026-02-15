@@ -6,7 +6,7 @@ import { Lock, Mail, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface AdminLoginProps {
-  onLogin: (email: string, password: string) => void;
+  onLogin: (email: string, password: string) => Promise<void>;
 }
 
 export default function AdminLogin({ onLogin }: AdminLoginProps) {
@@ -30,12 +30,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
         return;
       }
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // For demo purposes, accept any email/password
-      // In production, validate against your auth system
-      onLogin(email, password);
+      await onLogin(email, password);
       toast.success('Login successful');
     } catch (err: any) {
       setError(err.message || 'Login failed. Please try again.');

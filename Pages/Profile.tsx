@@ -219,7 +219,7 @@ function ProfileContent() {
                   <div className="space-y-4">
                     {submissions.map((submission: any) => (
                       <motion.div
-                        key={submission.id}
+                        key={submission._id || submission.id}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow"

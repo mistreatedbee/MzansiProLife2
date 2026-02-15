@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Button } from "../src/components/ui/button";
 import { ArrowLeft, ArrowRight, Check, Loader2, Home, ClipboardList } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { toast } from 'sonner';
+import { useAuth } from '@/contexts/AuthContext';
 
 import QuestionnaireStep1 from '../src/components/questionnaire/QuestionaireStep1';
 import AmbassadorForm from '../src/components/questionnaire/AmbassadorForm';
@@ -32,6 +33,8 @@ const formTitles = {
 type SubmissionOption = keyof typeof formTitles;
 
 export default function Questionnaire() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [searchParams] = useSearchParams();
   const preselectedType = searchParams.get('type');
   
@@ -48,13 +51,6 @@ export default function Questionnaire() {
       setStep(2);
     }
   }, [preselectedType]);
-
-  const generateReferenceNumber = () => {
-    const prefix = 'MPD';
-    const timestamp = Date.now().toString(36).toUpperCase();
-    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-    return `${prefix}-${timestamp}-${random}`;
-  };
 
   const handleOptionSelect = (option: SubmissionOption) => {
     setSelectedOption(option);
@@ -78,18 +74,23 @@ export default function Questionnaire() {
   };
 
   const handleSubmit = async () => {
+    if (!isAuthenticated) {
+      toast.error('Please log in to submit a questionnaire.');
+      navigate('/login');
+      return;
+    }
+
     setIsSubmitting(true);
-    const refNum = generateReferenceNumber();
 
     try {
-      await base44.entities.Submission.create({
+      const response = await base44.entities.Submission.create({
         submission_type: selectedOption,
-        reference_number: refNum,
         status: 'new',
         ...formData,
       });
 
-      setReferenceNumber(refNum);
+      const createdSubmission = response?.submission || response;
+      setReferenceNumber(createdSubmission?.reference_number || 'N/A');
       setSubmitted(true);
       toast.success('Submission successful!');
     } catch (error) {

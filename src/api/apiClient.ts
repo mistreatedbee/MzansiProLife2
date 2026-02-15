@@ -110,7 +110,7 @@ export const submissionsAPI = {
       });
     }
     const queryString = params.toString();
-    return apiRequest<any[]>(`/submissions${queryString ? `?${queryString}` : ''}`);
+    return apiRequest<any>(`/submissions${queryString ? `?${queryString}` : ''}`);
   },
 
   get: async (id: string) => {
@@ -164,7 +164,7 @@ export const adminAPI = {
 
   getConversations: async () => {
     const response = await apiRequest<any>('/admin/conversations');
-    return response.data?.conversations || response.conversations || [];
+    return response.conversations || [];
   },
 
   getDonations: async (filters?: {
@@ -195,22 +195,24 @@ export const adminAPI = {
 
 // Chat API
 export const chatAPI = {
-  createConversation: async (sessionId?: string, userName?: string, userPhone?: string) => {
+  createConversation: async (sessionId?: string, userName?: string, userPhone?: string, sessionToken?: string) => {
     return apiRequest<any>('/chat/conversations', {
       method: 'POST',
       body: JSON.stringify({ 
         session_id: sessionId,
+        session_token: sessionToken,
         user_name: userName,
         user_phone: userPhone
       }),
     });
   },
 
-  addMessage: async (sessionId: string, role: 'user' | 'assistant', content: string, options?: any[]) => {
+  addMessage: async (sessionId: string, role: 'user' | 'assistant', content: string, options?: any[], sessionToken?: string) => {
     return apiRequest<any>('/chat/messages', {
       method: 'POST',
       body: JSON.stringify({ 
         session_id: sessionId, 
+        session_token: sessionToken,
         role, 
         content,
         options: options || null

@@ -86,6 +86,7 @@ const staffMembers = [
 ];
 
 export default function AdminDashboard() {
+  const getSubmissionId = (submission: any) => submission?._id || submission?.id;
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     // Check if user is already logged in (from localStorage)
     return localStorage.getItem('admin_authenticated') === 'true';
@@ -104,36 +105,32 @@ export default function AdminDashboard() {
 
   // Handle login
   const handleLogin = async (email: string, password: string) => {
-    try {
-      // Use admin login endpoint (verifies admin role)
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/admin-login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      
-      const data = await response.json();
-      
-      if (data.success && data.data.user.role === 'admin') {
-        localStorage.setItem('admin_authenticated', 'true');
-        localStorage.setItem('admin_email', email);
-        localStorage.setItem('admin_name', data.data.user.name);
-        localStorage.setItem('auth_token', data.data.token);
-        setIsAuthenticated(true);
-        toast.success('Admin login successful');
-      } else {
-        toast.error(data.message || 'Invalid credentials or insufficient permissions');
-      }
-    } catch (error: any) {
-      console.error('Login error:', error);
-      toast.error(error.message || 'Login failed. Please check your credentials.');
+    // Use admin login endpoint (verifies admin role)
+    const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/admin-login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    
+    const data = await response.json();
+    
+    if (data.success && data.data.user.role === 'admin') {
+      localStorage.setItem('admin_authenticated', 'true');
+      localStorage.setItem('admin_email', email);
+      localStorage.setItem('admin_name', data.data.user.name);
+      localStorage.setItem('auth_token', data.data.token);
+      setIsAuthenticated(true);
+      return;
     }
+
+    throw new Error(data.message || 'Invalid credentials or insufficient permissions');
   };
 
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('admin_authenticated');
     localStorage.removeItem('admin_email');
+    localStorage.removeItem('auth_token');
     setIsAuthenticated(false);
   };
 
@@ -163,7 +160,7 @@ export default function AdminDashboard() {
     }),
   });
 
-  const submissions: any[] = submissionsData?.data?.submissions || [];
+  const submissions: any[] = submissionsData?.submissions || [];
 
   const updateMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: any }) => adminAPI.updateSubmission(id, data),
@@ -178,7 +175,7 @@ export default function AdminDashboard() {
   });
 
   // Stats from API or calculated
-  const stats = statsData?.data || {
+  const stats = statsData || {
     totalSubmissions: submissions.length,
     newSubmissions: submissions.filter((s: any) => s.status === 'new').length,
     inProgress: submissions.filter((s: any) => s.status === 'in_progress').length,
@@ -234,22 +231,28 @@ export default function AdminDashboard() {
   }, {});
 
   const handleStatusChange = (submission: any, newStatus: string) => {
-    updateMutation.mutate({ id: submission.id, data: { status: newStatus } });
+    const submissionId = getSubmissionId(submission);
+    if (!submissionId) return;
+    updateMutation.mutate({ id: submissionId, data: { status: newStatus } });
     toast.success('Status updated successfully');
   };
 
   const handleAssignStaff = (submission: any, staffId: string) => {
     const staff = staffMembers.find(s => s.id === staffId);
+    const submissionId = getSubmissionId(submission);
+    if (!submissionId) return;
     updateMutation.mutate({ 
-      id: submission.id, 
+      id: submissionId, 
       data: { assigned_to: staff?.name || staffId } 
     });
     toast.success(`Assigned to ${staff?.name || 'staff member'}`);
   };
 
   const handleSaveNotes = (submission: any) => {
+    const submissionId = getSubmissionId(submission);
+    if (!submissionId) return;
     updateMutation.mutate({ 
-      id: submission.id, 
+      id: submissionId, 
       data: { notes } 
     });
     toast.success('Notes saved');
@@ -458,7 +461,7 @@ export default function AdminDashboard() {
                     const type = submissionTypes[submission.submission_type as keyof typeof submissionTypes] || submissionTypes.question_comment;
                     return (
                       <div 
-                        key={submission.id}
+                        key={getSubmissionId(submission)}
                         onClick={() => setSelectedSubmission(submission)}
                         className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 cursor-pointer transition-colors"
                       >
@@ -611,7 +614,7 @@ export default function AdminDashboard() {
                       const type = submissionTypes[submission.submission_type as keyof typeof submissionTypes] || submissionTypes.question_comment;
                       return (
                         <motion.div
-                          key={submission.id}
+                          key={getSubmissionId(submission)}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           className="p-4 hover:bg-gray-50 cursor-pointer transition-colors"

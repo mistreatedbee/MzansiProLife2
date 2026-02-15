@@ -33,7 +33,8 @@ interface Base44Client {
 const createSubmissionClient = (): Base44EntityClient<any> => ({
   async list(orderBy = '-created_date', limit = 100) {
     try {
-      const submissions = await submissionsAPI.list();
+      const response = await submissionsAPI.list();
+      const submissions = Array.isArray(response) ? response : (response?.submissions || []);
       // Sort and limit (backend should handle this, but client-side fallback)
       const sorted = submissions.sort((a: any, b: any) => {
         const dateA = new Date(a.created_date || 0).getTime();

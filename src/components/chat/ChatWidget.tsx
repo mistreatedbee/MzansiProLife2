@@ -1036,6 +1036,7 @@ We are a Non-Profit Cooperation (Registration: 2025/205554/08) aimed at enabling
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState<{ name: string; phone: string } | null>(null);
   const [collectingInfo, setCollectingInfo] = useState<'name' | 'phone' | 'complete' | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -1056,6 +1057,7 @@ export default function ChatWidget() {
       const newSessionId = `chat_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       const response = await chatAPI.createConversation(newSessionId);
       setSessionId(response.conversation?.session_id || newSessionId);
+      setSessionToken(response.session_token || null);
       
       // Start collecting user info
       setCollectingInfo('name');
@@ -1153,7 +1155,7 @@ I'm your digital assistant 🤖. To provide you with the best assistance, I'll n
       // Update conversation with user info
       if (sessionId) {
         try {
-          await chatAPI.createConversation(sessionId, updatedUserInfo.name, updatedUserInfo.phone);
+          await chatAPI.createConversation(sessionId, updatedUserInfo.name, updatedUserInfo.phone, sessionToken || undefined);
         } catch (error) {
           console.error('Failed to update conversation:', error);
         }
@@ -1175,7 +1177,7 @@ Now, how can I help you today? Please choose an option below:`,
     // Save message to backend
     if (sessionId && collectingInfo === 'complete') {
       try {
-        await chatAPI.addMessage(sessionId, 'user', messageContent, selectedOption ? [selectedOption] : undefined);
+        await chatAPI.addMessage(sessionId, 'user', messageContent, selectedOption ? [selectedOption] : undefined, sessionToken || undefined);
       } catch (error) {
         console.error('Failed to save message:', error);
       }
@@ -1191,7 +1193,7 @@ Now, how can I help you today? Please choose an option below:`,
       // Save assistant response to backend
       if (sessionId && collectingInfo === 'complete') {
         try {
-          await chatAPI.addMessage(sessionId, 'assistant', response.content, response.options);
+          await chatAPI.addMessage(sessionId, 'assistant', response.content, response.options, sessionToken || undefined);
         } catch (error) {
           console.error('Failed to save message:', error);
         }
