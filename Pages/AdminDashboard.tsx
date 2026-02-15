@@ -85,6 +85,18 @@ const staffMembers = [
   { id: 'staff3', name: 'Mike Johnson', role: 'Support' },
 ];
 
+const adminTabs = [
+  { value: 'overview', label: 'Overview', icon: BarChart3 },
+  { value: 'submissions', label: 'Submissions', icon: FileText },
+  { value: 'chatbot', label: 'Chatbot', icon: Bot },
+  { value: 'content', label: 'Content', icon: Settings },
+  { value: 'communication', label: 'Communication', icon: MessageCircle },
+  { value: 'donations', label: 'Donations', icon: Heart },
+  { value: 'users', label: 'Users', icon: Users },
+  { value: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { value: 'security', label: 'Security', icon: Shield },
+];
+
 export default function AdminDashboard() {
   const getSubmissionId = (submission: any) => submission?._id || submission?.id;
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -315,44 +327,31 @@ export default function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="mb-8 bg-white shadow-sm rounded-xl p-1 flex-wrap">
-            <TabsTrigger value="overview" className="rounded-lg px-6">
-              <BarChart3 className="w-4 h-4 mr-2" />
-              Overview
-            </TabsTrigger>
-            <TabsTrigger value="submissions" className="rounded-lg px-6">
-              <FileText className="w-4 h-4 mr-2" />
-              Submissions
-            </TabsTrigger>
-            <TabsTrigger value="chatbot" className="rounded-lg px-6">
-              <Bot className="w-4 h-4 mr-2" />
-              Chatbot
-            </TabsTrigger>
-            <TabsTrigger value="content" className="rounded-lg px-6">
-              <Settings className="w-4 h-4 mr-2" />
-              Content
-            </TabsTrigger>
-            <TabsTrigger value="communication" className="rounded-lg px-6">
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Communication
-            </TabsTrigger>
-            <TabsTrigger value="donations" className="rounded-lg px-6">
-              <Heart className="w-4 h-4 mr-2" />
-              Donations
-            </TabsTrigger>
-            <TabsTrigger value="users" className="rounded-lg px-6">
-              <Users className="w-4 h-4 mr-2" />
-              Users
-            </TabsTrigger>
-            <TabsTrigger value="analytics" className="rounded-lg px-6">
-              <BarChart3 className="w-4 h-4 mr-2" />
-              Analytics
-            </TabsTrigger>
-            <TabsTrigger value="security" className="rounded-lg px-6">
-              <Shield className="w-4 h-4 mr-2" />
-              Security
-            </TabsTrigger>
-          </TabsList>
+          <div className="mb-4 md:hidden">
+            <Select value={activeTab} onValueChange={setActiveTab}>
+              <SelectTrigger className="w-full rounded-xl bg-white">
+                <SelectValue placeholder="Select section" />
+              </SelectTrigger>
+              <SelectContent>
+                {adminTabs.map((tab) => (
+                  <SelectItem key={tab.value} value={tab.value}>
+                    {tab.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="mb-8 hidden md:block overflow-x-auto pb-2">
+            <TabsList className="w-max min-w-full bg-white shadow-sm rounded-xl p-1">
+              {adminTabs.map((tab) => (
+                <TabsTrigger key={tab.value} value={tab.value} className="rounded-lg px-6 whitespace-nowrap">
+                  <tab.icon className="w-4 h-4 mr-2" />
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
 
           {/* Overview Tab */}
           <TabsContent value="overview">
