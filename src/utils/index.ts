@@ -15,6 +15,8 @@ export function createPageUrl(pageName: string, params?: Record<string, string>)
     'Donate': '/donate',
     'Contact': '/contact',
     'AdminDashboard': '/admin',
+    'SLCAInvitation': '/slca-invitation',
+    'SLCAPoster': '/slca-poster',
   };
 
   let url = routes[pageName] || '/';
@@ -115,4 +117,3 @@ export function truncate(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength - 3) + '...';
 }
-

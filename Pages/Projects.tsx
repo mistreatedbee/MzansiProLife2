@@ -19,13 +19,13 @@ const projects = [
   {
     icon: Users,
     title: 'Social Life Change Ambassadors',
-    description: 'Recruitment and training of community change agents who lead transformation initiatives in their neighborhoods.',
+    description: 'A public invitation for ordinary South Africans to become local change agents who help build village structures, community projects, work opportunities, and lasting social transformation.',
     details: [
       'Community leader identification and recruitment',
-      'Comprehensive training programs',
-      'Ongoing mentorship and support',
-      'Network building across communities',
-      'Impact measurement and reporting'
+      'Village structures for every 500 households',
+      'Community problem-solving, healing, and reconciliation',
+      'Business establishment and work creation',
+      'Leadership development, mentorship, and implementation support'
     ],
     image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&auto=format&fit=crop&q=80',
     color: 'from-blue-500 to-blue-600'
@@ -164,12 +164,19 @@ export default function Projects() {
                       </li>
                     ))}
                   </ul>
-                  <Link to={createPageUrl('Questionnaire')}>
+                  <Link to={idx === 0 ? createPageUrl('SLCAInvitation') : createPageUrl('Questionnaire')}>
                     <Button className="bg-green-600 hover:bg-green-700 rounded-full px-6 group">
-                      Get Involved
+                      {idx === 0 ? 'View Invitation' : 'Get Involved'}
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
+                  {idx === 0 && (
+                    <Link to={createPageUrl('Questionnaire', { type: 'ambassador' })} className="ml-3 inline-flex">
+                      <Button variant="outline" className="rounded-full px-6 border-green-200 text-green-700 hover:bg-green-50">
+                        Apply Now
+                      </Button>
+                    </Link>
+                  )}
                 </div>
                 
                 <div className={idx % 2 === 1 ? 'lg:order-1' : ''}>

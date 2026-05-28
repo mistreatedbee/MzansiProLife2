@@ -14,6 +14,8 @@ import ForgotPassword from '../Pages/ForgotPassword'
 import Profile from '../Pages/Profile'
 import Terms from '../Pages/Terms'
 import Privacy from '../Pages/Privacy'
+import SLCAInvitation from '../Pages/SLCAInvitation'
+import SLCAPoster from '../Pages/SLCAPoster'
 import NotFound from '../Pages/NotFound'
 
 function App() {
@@ -45,6 +47,8 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/slca-invitation" element={<SLCAInvitation />} />
+        <Route path="/slca-poster" element={<SLCAPoster />} />
         <Route path="/profile" element={
           <ProtectedRoute>
             <Profile />
@@ -58,4 +62,3 @@ function App() {
 }
 
 export default App
-

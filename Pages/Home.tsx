@@ -5,6 +5,7 @@ import AboutPreview from '../src/components/home/AboutPreview';
 import MissionVisionValues from '../src/components/home/MissionVisionValues';
 import ChallengeSolutionSection from '../src/components/home/ChallengeSolutionSection';
 import ProjectsSection from '../src/components/home/ProjectsSections';
+import SLCAInvitationSection from '../src/components/home/SLCAInvitationSection';
 import GallerySection from '../src/components/home/GallerySection';
 import QuestionnairePreview from '../src/components/home/QuestionnairePreview';
 import DonateSection from '../src/components/home/DonateSection';
@@ -24,6 +25,7 @@ export default function Home() {
         <MissionVisionValues />
         <ChallengeSolutionSection />
         <ProjectsSection />
+        <SLCAInvitationSection />
         <GallerySection />
         <QuestionnairePreview />
         <DonateSection />
