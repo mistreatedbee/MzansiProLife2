@@ -604,12 +604,12 @@ Please type your question or comment, and I'll do my best to help.`,
   handleQuestionStep(userInput: string): Message {
     const intent = this.detectIntent(userInput);
     const confidence = this.calculateConfidence(userInput, 'text');
-    
+
     // High confidence - provide answer
     if (confidence >= 80 && intent.confidence >= 80) {
       this.state.flowStep = 0;
       this.state.currentFlow = null;
-      
+
       // Provide contextual answer based on intent
       if (intent.intent === 'contact') {
         return {
@@ -625,27 +625,7 @@ Please type your question or comment, and I'll do my best to help.`,
 `,
         };
       }
-            { label: 'Fill Donation Form', value: 'form_donate', action: 'link' },
-          ],
-        };
-      }
-      
-      if (intent.intent === 'contact') {
-        return {
-          role: 'assistant',
-          content: `**Contact Information:**
 
-**Chatbot:** [082 232 2026](tel:0822322026)  
-**Other:** [063 903 2797](tel:0639032797)  
-**WhatsApp:** [082 232 2026](https://wa.me/27822322026)  
-**Email:** mzansiprolifedevelopment@gmail.com
-
-**Address:** 32 Bell Street, Caltex Building, Office No. 106, Nelspruit, 1200
-
-Is there anything else I can help with?`,
-        };
-      }
-      
       return {
         role: 'assistant',
         content: `Thank you for your question! I've noted it down.
@@ -661,7 +641,7 @@ Would you like to:
         ],
       };
     }
-    
+
     // Medium confidence - tentative answer
     if (confidence >= 50 && confidence < 80) {
       return {
@@ -671,7 +651,7 @@ Would you like to:
 Could you please tell me a bit more about what you need? This will help me provide a better answer.`,
       };
     }
-    
+
     // Low confidence - escalate
     this.state.escalationCount++;
     return this.getEscalationMessage();
