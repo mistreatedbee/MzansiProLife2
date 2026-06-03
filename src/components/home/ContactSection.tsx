@@ -7,10 +7,8 @@ import { motion } from 'framer-motion';
 
 export default function ContactSection() {
   const phoneNumbers = [
-    { label: 'Vodacom', number: '079 822 2269', color: 'bg-red-50 text-red-600' },
-    { label: 'MTN', number: '078 081 3955', color: 'bg-yellow-50 text-yellow-600' },
-    { label: 'Cell C', number: '061 708 3753', color: 'bg-blue-50 text-blue-600' },
-    { label: 'Telkom', number: '061 473 0612', color: 'bg-purple-50 text-purple-600' },
+    { label: 'Chatbot', number: '082 232 2026', color: 'bg-green-50 text-green-600' },
+    { label: 'Other', number: '063 903 2797', color: 'bg-gray-50 text-gray-700' },
   ];
 
   return (
@@ -52,7 +50,7 @@ export default function ContactSection() {
             {/* WhatsApp & Email */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <a
-                href="https://wa.me/27737353200"
+                href="https://wa.me/27822322026"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-green-50 rounded-2xl p-5 hover:bg-green-100 transition-colors group"
@@ -63,7 +61,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">WhatsApp</p>
-                    <p className="font-semibold text-gray-800">073 735 3200</p>
+                    <p className="font-semibold text-gray-800">082 232 2026</p>
                   </div>
                 </div>
               </a>

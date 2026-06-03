@@ -103,14 +103,18 @@ export class ErrorBoundary extends Component<Props, State> {
               <div className="pt-4 border-t border-gray-200">
                 <p className="text-sm text-gray-600 mb-2">Need help? Contact us:</p>
                 <div className="space-y-1 text-sm">
-                  <a href="tel:0798222269" className="text-green-600 hover:text-green-700">
-                    📞 079 822 2269
-                  </a>
-                  <br />
-                  <a href="mailto:mzansiprolifedevelopment@gmail.com" className="text-green-600 hover:text-green-700">
-                    ✉️ mzansiprolifedevelopment@gmail.com
-                  </a>
-                </div>
+                    <a href="tel:0822322026" className="text-green-600 hover:text-green-700">
+                      📞 Chatbot: 082 232 2026
+                    </a>
+                    <br />
+                    <a href="tel:0639032797" className="text-green-600 hover:text-green-700">
+                      📞 Other: 063 903 2797
+                    </a>
+                    <br />
+                    <a href="mailto:mzansiprolifedevelopment@gmail.com" className="text-green-600 hover:text-green-700">
+                      ✉️ mzansiprolifedevelopment@gmail.com
+                    </a>
+                  </div>
               </div>
             </CardContent>
           </Card>

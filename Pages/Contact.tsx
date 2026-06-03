@@ -21,10 +21,8 @@ export default function Contact() {
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const phoneNumbers = [
-    { label: 'Vodacom', number: '079 822 2269', color: 'bg-red-50 text-red-600 border-red-100' },
-    { label: 'MTN', number: '078 081 3955', color: 'bg-yellow-50 text-yellow-600 border-yellow-100' },
-    { label: 'Cell C', number: '061 708 3753', color: 'bg-blue-50 text-blue-600 border-blue-100' },
-    { label: 'Telkom', number: '061 473 0612', color: 'bg-purple-50 text-purple-600 border-purple-100' },
+    { label: 'Chatbot', number: '082 232 2026', color: 'bg-green-50 text-green-600 border-green-100' },
+    { label: 'Other', number: '063 903 2797', color: 'bg-gray-50 text-gray-700 border-gray-100' },
   ];
 
   const copyToClipboard = (text: string) => {
@@ -96,7 +94,7 @@ export default function Contact() {
 
                 {/* WhatsApp */}
                 <a
-                  href="https://wa.me/27737353200"
+                  href="https://wa.me/27822322026"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block bg-green-50 border border-green-100 rounded-2xl p-6 hover:bg-green-100 transition-colors group"
@@ -108,7 +106,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">WhatsApp</p>
-                        <p className="font-bold text-xl text-green-600">073 735 3200</p>
+                        <p className="font-bold text-xl text-green-600">082 232 2026</p>
                       </div>
                     </div>
                     <ExternalLink className="w-5 h-5 text-green-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

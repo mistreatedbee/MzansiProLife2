@@ -10,11 +10,9 @@ const urgencyLevels = [
 ];
 
 const contactMethods = [
-  { value: 'vodacom', label: 'Call - Vodacom: 079 822 2269', number: '0798222269' },
-  { value: 'mtn', label: 'Call - MTN: 078 081 3955', number: '0780813955' },
-  { value: 'cellc', label: 'Call - Cell C: 061 708 3753', number: '0617083753' },
-  { value: 'telkom', label: 'Call - Telkom: 061 473 0612', number: '0614730612' },
-  { value: 'whatsapp', label: 'WhatsApp: 073 735 3200', number: '27737353200' },
+  { value: 'chatbot', label: 'Chatbot: 082 232 2026', number: '0822322026' },
+  { value: 'other', label: 'Other: 063 903 2797', number: '0639032797' },
+  { value: 'whatsapp', label: 'WhatsApp: 082 232 2026', number: '27822322026' },
 ];
 
 const timeSlots = [
@@ -35,45 +33,27 @@ export default function AgentRequestForm({ data, onChange }: { data: any; onChan
           Our Contact Numbers
         </h3>
         <div className="grid sm:grid-cols-2 gap-3">
-          <a href="tel:0798222269" className="flex items-center gap-3 p-3 bg-white rounded-xl hover:bg-green-50 transition-colors">
-            <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-              <Phone className="w-5 h-5 text-red-600" />
+          <a href="tel:0822322026" className="flex items-center gap-3 p-3 bg-white rounded-xl hover:bg-green-50 transition-colors">
+            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+              <Phone className="w-5 h-5 text-green-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-500">Vodacom</p>
-              <p className="font-semibold text-gray-800">079 822 2269</p>
+              <p className="text-xs text-gray-500">Chatbot</p>
+              <p className="font-semibold text-gray-800">082 232 2026</p>
             </div>
           </a>
-          <a href="tel:0780813955" className="flex items-center gap-3 p-3 bg-white rounded-xl hover:bg-green-50 transition-colors">
-            <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
-              <Phone className="w-5 h-5 text-yellow-600" />
+          <a href="tel:0639032797" className="flex items-center gap-3 p-3 bg-white rounded-xl hover:bg-green-50 transition-colors">
+            <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+              <Phone className="w-5 h-5 text-gray-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-500">MTN</p>
-              <p className="font-semibold text-gray-800">078 081 3955</p>
-            </div>
-          </a>
-          <a href="tel:0617083753" className="flex items-center gap-3 p-3 bg-white rounded-xl hover:bg-green-50 transition-colors">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-              <Phone className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500">Cell C</p>
-              <p className="font-semibold text-gray-800">061 708 3753</p>
-            </div>
-          </a>
-          <a href="tel:0614730612" className="flex items-center gap-3 p-3 bg-white rounded-xl hover:bg-green-50 transition-colors">
-            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-              <Phone className="w-5 h-5 text-purple-600" />
-            </div>
-            <div>
-              <p className="text-xs text-gray-500">Telkom</p>
-              <p className="font-semibold text-gray-800">061 473 0612</p>
+              <p className="text-xs text-gray-500">Other</p>
+              <p className="font-semibold text-gray-800">063 903 2797</p>
             </div>
           </a>
         </div>
         <a 
-          href="https://wa.me/27737353200" 
+          href="https://wa.me/27822322026" 
           target="_blank" 
           rel="noopener noreferrer"
           className="flex items-center gap-3 p-4 mt-3 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors"
@@ -81,7 +61,7 @@ export default function AgentRequestForm({ data, onChange }: { data: any; onChan
           <MessageCircle className="w-6 h-6" />
           <div>
             <p className="text-sm opacity-80">WhatsApp</p>
-            <p className="font-bold">073 735 3200</p>
+            <p className="font-bold">082 232 2026</p>
           </div>
         </a>
       </div>

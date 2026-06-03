@@ -105,7 +105,7 @@ export default function CommunicationCenter() {
               <MessageCircle className="w-8 h-8 text-green-600" />
               <div>
                 <h3 className="font-semibold">WhatsApp</h3>
-                <p className="text-sm text-gray-600">073 735 3200</p>
+                <p className="text-sm text-gray-600">082 232 2026</p>
               </div>
             </div>
             <Button variant="outline" className="w-full rounded-xl" onClick={() => {

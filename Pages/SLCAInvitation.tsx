@@ -112,7 +112,7 @@ export default function SLCAInvitation() {
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <a href="https://wa.me/27737353200" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/27822322026" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full px-8 border-white text-white hover:bg-white/10">
                   <MessageCircle className="mr-2 w-5 h-5" />
                   Join on WhatsApp
@@ -202,11 +202,11 @@ export default function SLCAInvitation() {
               <div className="bg-gradient-to-br from-green-600 to-green-800 p-8 sm:p-12 text-white">
                 <h3 className="text-2xl font-bold mb-6">Connect with us</h3>
                 <div className="space-y-4">
-                  <a href="https://wa.me/27737353200" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/10 rounded-2xl p-4 hover:bg-white/15 transition-colors">
+                  <a href="https://wa.me/27822322026" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/10 rounded-2xl p-4 hover:bg-white/15 transition-colors">
                     <MessageCircle className="w-6 h-6" />
                     <div>
                       <p className="text-sm text-green-100">WhatsApp</p>
-                      <p className="font-semibold">073 735 3200</p>
+                      <p className="font-semibold">082 232 2026</p>
                     </div>
                   </a>
                   <a href="mailto:mzansiprolifedevelopmentinstitute@gmail.com" className="flex items-center gap-4 bg-white/10 rounded-2xl p-4 hover:bg-white/15 transition-colors">

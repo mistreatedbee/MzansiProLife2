@@ -182,7 +182,7 @@ export default function Signup() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="079 822 2269"
+                    placeholder="082 232 2026"
                     className="pl-10 h-12 rounded-xl border-gray-300 focus:border-green-500 focus:ring-green-500"
                   />
                 </div>

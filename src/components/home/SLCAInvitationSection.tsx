@@ -92,7 +92,7 @@ export default function SLCAInvitationSection() {
                   Apply Now
                 </Button>
               </Link>
-              <a href="https://wa.me/27737353200" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/27822322026" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full px-8 border-gray-200">
                   <MessageCircle className="mr-2 w-5 h-5" />
                   WhatsApp

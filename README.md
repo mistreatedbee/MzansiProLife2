@@ -167,8 +167,8 @@ pnpm preview
 ## Contact
 
 - **Email**: mzansiprolifedevelopment@gmail.com
-- **Phone**: 079 822 2269 (Vodacom)
-- **WhatsApp**: 073 735 3200
+- **Phone**: 082 232 2026 (Chatbot)
+- **Other**: 063 903 2797
 
 ## Banking Details
 

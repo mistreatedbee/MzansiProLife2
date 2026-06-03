@@ -46,7 +46,7 @@ export const emailTemplates = {
             </ul>
             <a href="https://mzansiprolife.org/profile" class="button">View Your Profile</a>
             <p>If you have any questions, feel free to contact us at:</p>
-            <p>📞 079 822 2269<br>✉️ mzansiprolifedevelopment@gmail.com</p>
+            <p>📞 Chatbot: 082 232 2026<br>📞 Other: 063 903 2797<br>✉️ mzansiprolifedevelopment@gmail.com</p>
             <p>Best regards,<br>The Mzansi Prolife Team</p>
           </div>
           <div class="footer">
@@ -57,7 +57,7 @@ export const emailTemplates = {
       </body>
       </html>
     `,
-    text: `Welcome to Mzansi Prolife Development Institute NPC!\n\nDear ${data.name},\n\nThank you for joining us. Your account has been successfully created.\n\nVisit your profile: https://mzansiprolife.org/profile\n\nContact us: 079 822 2269 or mzansiprolifedevelopment@gmail.com\n\nBest regards,\nThe Mzansi Prolife Team`,
+    text: `Welcome to Mzansi Prolife Development Institute NPC!\n\nDear ${data.name},\n\nThank you for joining us. Your account has been successfully created.\n\nVisit your profile: https://mzansiprolife.org/profile\n\nContact us: Chatbot 082 232 2026 or Other 063 903 2797 or mzansiprolifedevelopment@gmail.com\n\nBest regards,\nThe Mzansi Prolife Team`,
   }),
 
   /**
@@ -94,7 +94,7 @@ export const emailTemplates = {
             </div>
             <p>We will review your submission and get back to you soon. You can track the status of your submission in your profile.</p>
             <p>If you have any questions, please contact us:</p>
-            <p>📞 079 822 2269<br>✉️ mzansiprolifedevelopment@gmail.com</p>
+            <p>📞 Chatbot: 082 232 2026<br>📞 Other: 063 903 2797<br>✉️ mzansiprolifedevelopment@gmail.com</p>
             <p>Best regards,<br>The Mzansi Prolife Team</p>
           </div>
           <div class="footer">
@@ -104,7 +104,7 @@ export const emailTemplates = {
       </body>
       </html>
     `,
-    text: `Submission Confirmed\n\nDear ${data.name},\n\nYour ${data.submissionType} submission has been received.\n\nReference: ${data.referenceNumber}\nDate: ${new Date().toLocaleDateString('en-ZA')}\n\nWe will review and contact you soon.\n\nContact: 079 822 2269`,
+    text: `Submission Confirmed\n\nDear ${data.name},\n\nYour ${data.submissionType} submission has been received.\n\nReference: ${data.referenceNumber}\nDate: ${new Date().toLocaleDateString('en-ZA')}\n\nWe will review and contact you soon.\n\nContact: Chatbot 082 232 2026 or Other 063 903 2797`,
   }),
 
   /**

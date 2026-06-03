@@ -37,7 +37,7 @@ interface ConversationState {
   lastUserIntent: string;
 }
 
-const WHATSAPP_NUMBER = '27737353200';
+const WHATSAPP_NUMBER = '27822322026';
 const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=`;
 
 // Main Menu Options
@@ -611,20 +611,20 @@ Please type your question or comment, and I'll do my best to help.`,
       this.state.currentFlow = null;
       
       // Provide contextual answer based on intent
-      if (intent.intent === 'donate') {
+      if (intent.intent === 'contact') {
         return {
           role: 'assistant',
-          content: `**Donation Information:**
+          content: `**Contact Information:**
 
-**Banking Details:**
-- Account: Mzansi Prolife Development Institute NPC
-- Bank: Capitec Business
-- Account Number: 1053 5763 31
-- Reference: Your name or "Donation"
+**Chatbot:** [082 232 2026](tel:0822322026)  
+**Other:** [063 903 2797](tel:0639032797)  
+**WhatsApp:** [082 232 2026](https://wa.me/27822322026)  
+**Email:** mzansiprolifedevelopment@gmail.com
 
-You can donate to any of our 6 projects. Would you like more details?`,
-          options: [
-            { label: 'More Donation Info', value: 'donate', action: 'flow' },
+**Address:** 32 Bell Street, Caltex Building, Office No. 106, Nelspruit, 1200
+`,
+        };
+      }
             { label: 'Fill Donation Form', value: 'form_donate', action: 'link' },
           ],
         };
@@ -635,8 +635,9 @@ You can donate to any of our 6 projects. Would you like more details?`,
           role: 'assistant',
           content: `**Contact Information:**
 
-**Phone:** [079 822 2269](tel:0798222269) (Vodacom)  
-**WhatsApp:** [073 735 3200](https://wa.me/27737353200)  
+**Chatbot:** [082 232 2026](tel:0822322026)  
+**Other:** [063 903 2797](tel:0639032797)  
+**WhatsApp:** [082 232 2026](https://wa.me/27822322026)  
 **Email:** mzansiprolifedevelopment@gmail.com
 
 **Address:** 32 Bell Street, Caltex Building, Office No. 106, Nelspruit, 1200
@@ -779,9 +780,9 @@ Let's start! What's your company name?`,
     
     // escalation context removed (was unused in this method)
     
-    return {
-      role: 'assistant',
-      content: `I want to make sure you get the right help. 😊
+        return {
+          role: 'assistant',
+          content: `I want to make sure you get the right help. 😊
 
 You can choose one of the options below:`,
       options: [
@@ -811,8 +812,9 @@ A human agent will assist you as soon as possible.
 You can stay here, or switch to WhatsApp if you prefer faster help.
 
 **Contact Options:**
-- **Phone:** [079 822 2269](tel:0798222269) (Vodacom)
-- **WhatsApp:** [073 735 3200](https://wa.me/27737353200)
+- **Chatbot:** [082 232 2026](tel:0822322026)
+- **Other:** [063 903 2797](tel:0639032797)
+- **WhatsApp:** [082 232 2026](https://wa.me/27822322026)
 - **Email:** mzansiprolifedevelopment@gmail.com
 
 Our team is available Monday-Friday, 8 AM - 5 PM.`,
@@ -872,7 +874,7 @@ Please choose one of the options below, or type your question in a different way
           role: 'assistant',
           content: `Perfect! 💬 I've opened WhatsApp for you.
 
-**WhatsApp Number:** [073 735 3200](https://wa.me/27737353200)
+**WhatsApp Number:** [082 232 2026](https://wa.me/27822322026)
 
 A real person will respond to you there. Response time may vary, but usually within a few hours during business hours.
 
@@ -965,19 +967,14 @@ Would you like to fill out the complete advertising form now?`,
         role: 'assistant',
         content: `**Contact Information:**
 
-**Phone Numbers:**
-- Vodacom: [079 822 2269](tel:0798222269)
-- MTN: [078 081 3955](tel:0780813955)
-- Cell C: [061 708 3753](tel:0617083753)
-- Telkom: [061 473 0612](tel:0614730612)
+**Chatbot:** [082 232 2026](tel:0822322026)
+**Other:** [063 903 2797](tel:0639032797)
 
-**WhatsApp:** [073 735 3200](https://wa.me/27737353200)
+**WhatsApp:** [082 232 2026](https://wa.me/27822322026)
 
 **Email:** [mzansiprolifedevelopment@gmail.com](mailto:mzansiprolifedevelopment@gmail.com)
 
-**Address:** 32 Bell Street | Caltex Building, Office No. 106, Nelspruit, 1200, South Africa
-
-For general inquiries, call Vodacom: 079 822 2269`,
+**Address:** 32 Bell Street | Caltex Building, Office No. 106, Nelspruit, 1200, South Africa`,
       };
     }
     
@@ -1053,18 +1050,19 @@ export default function ChatWidget() {
   }, [isOpen]);
 
   const initializeConversation = async () => {
-    try {
-      const newSessionId = `chat_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      const response = await chatAPI.createConversation(newSessionId);
-      setSessionId(response.conversation?.session_id || newSessionId);
-      setSessionToken(response.session_token || null);
-      
-      // Start collecting user info
-      setCollectingInfo('name');
-      setMessages([{
-        role: 'assistant',
-        content: `Hi 👋 Welcome to **Mzansi Prolife Development Institute**!
+    return {
+      role: 'assistant',
+      content: `**Contact Information:**
 
+  **Chatbot:** [082 232 2026](tel:0822322026)  
+  **Other:** [063 903 2797](tel:0639032797)  
+  **WhatsApp:** [082 232 2026](https://wa.me/27822322026)  
+  **Email:** mzansiprolifedevelopment@gmail.com
+
+  **Address:** 32 Bell Street, Caltex Building, Office No. 106, Nelspruit, 1200
+
+  Is there anything else I can help with?`,
+    };
 I'm your digital assistant 🤖. To provide you with the best assistance, I'll need a few details first.
 
 **What's your name?**`,
