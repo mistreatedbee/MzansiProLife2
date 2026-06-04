@@ -1012,8 +1012,8 @@ We are a Non-Profit Cooperation (Registration: 2025/205554/08) aimed at enabling
 // Main Component
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [sessionId] = useState<string | null>(null);
+  const [sessionToken] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState<{ name: string; phone: string } | null>(null);
   const [collectingInfo, setCollectingInfo] = useState<'name' | 'phone' | 'complete' | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
