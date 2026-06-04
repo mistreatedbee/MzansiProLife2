@@ -5,8 +5,8 @@ import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
   const phoneNumbers = [
-    { label: 'Chatbot', number: '082 232 2026' },
-    { label: 'Other', number: '063 903 2797' },
+    { label: 'Chatbot', number: '0822322026' },
+    { label: 'Other', number: '0639032797' },
   ];
 
   const quickLinks = [
@@ -122,7 +122,7 @@ export default function Footer() {
                 className="flex items-center gap-3 text-gray-400 hover:text-green-400 transition-colors text-sm"
               >
                 <MessageCircle className="w-4 h-4 text-green-500" />
-                WhatsApp: 082 232 2026
+                WhatsApp: 0822322026
               </a>
               <a 
                 href="mailto:mzansiprolifedevelopment@gmail.com"
