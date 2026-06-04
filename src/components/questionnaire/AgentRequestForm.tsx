@@ -10,9 +10,9 @@ const urgencyLevels = [
 ];
 
 const contactMethods = [
-  { value: 'chatbot', label: 'Chatbot: 082 232 2026', number: '0822322026' },
-  { value: 'other', label: 'Other: 063 903 2797', number: '0639032797' },
-  { value: 'whatsapp', label: 'WhatsApp: 082 232 2026', number: '27822322026' },
+  { value: 'chatbot', label: 'Chatbot: 0822322026', number: '0822322026' },
+  { value: 'other', label: 'Other: 0639032797', number: '0639032797' },
+  { value: 'whatsapp', label: 'WhatsApp: 0822322026', number: '27822322026' },
 ];
 
 const timeSlots = [
@@ -39,7 +39,7 @@ export default function AgentRequestForm({ data, onChange }: { data: any; onChan
             </div>
             <div>
               <p className="text-xs text-gray-500">Chatbot</p>
-              <p className="font-semibold text-gray-800">082 232 2026</p>
+              <p className="font-semibold text-gray-800">0822322026</p>
             </div>
           </a>
           <a href="tel:0639032797" className="flex items-center gap-3 p-3 bg-white rounded-xl hover:bg-green-50 transition-colors">
@@ -48,7 +48,7 @@ export default function AgentRequestForm({ data, onChange }: { data: any; onChan
             </div>
             <div>
               <p className="text-xs text-gray-500">Other</p>
-              <p className="font-semibold text-gray-800">063 903 2797</p>
+              <p className="font-semibold text-gray-800">0639032797</p>
             </div>
           </a>
         </div>
@@ -61,7 +61,7 @@ export default function AgentRequestForm({ data, onChange }: { data: any; onChan
           <MessageCircle className="w-6 h-6" />
           <div>
             <p className="text-sm opacity-80">WhatsApp</p>
-            <p className="font-bold">082 232 2026</p>
+            <p className="font-bold">0822322026</p>
           </div>
         </a>
       </div>

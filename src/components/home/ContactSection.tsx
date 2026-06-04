@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export default function ContactSection() {
   const phoneNumbers = [
     { label: 'Chatbot', number: '0822322026', color: 'bg-green-50 text-green-600' },
-    { label: 'Other', number: '063 903 2797', color: 'bg-gray-50 text-gray-700' },
+    { label: 'Other', number: '0639032797', color: 'bg-gray-50 text-gray-700' },
   ];
 
   return (

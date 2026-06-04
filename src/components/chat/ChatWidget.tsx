@@ -787,17 +787,17 @@ You can choose one of the options below:`,
       role: 'assistant',
       content: `Thanks! 👍
 
-A human agent will assist you as soon as possible.
+    A human agent will assist you as soon as possible.
 
-You can stay here, or switch to WhatsApp if you prefer faster help.
+    You can stay here, or switch to WhatsApp if you prefer faster help.
 
-**Contact Options:**
-- **Chatbot:** [082 232 2026](tel:0822322026)
-- **Other:** [063 903 2797](tel:0639032797)
-- **WhatsApp:** [082 232 2026](https://wa.me/27822322026)
-- **Email:** mzansiprolifedevelopment@gmail.com
+    **Contact Options:**
+    - **Chatbot:** [0822322026](tel:0822322026)
+    - **Other:** [0639032797](tel:0639032797)
+    - **WhatsApp:** [0822322026](https://wa.me/27822322026)
+    - **Email:** mzansiprolifedevelopment@gmail.com
 
-Our team is available Monday-Friday, 8 AM - 5 PM.`,
+    Our team is available Monday-Friday, 8 AM - 5 PM.`,
       options: [
         { 
           label: '💬 Try WhatsApp Instead', 
@@ -854,7 +854,7 @@ Please choose one of the options below, or type your question in a different way
           role: 'assistant',
           content: `Perfect! 💬 I've opened WhatsApp for you.
 
-**WhatsApp Number:** [082 232 2026](https://wa.me/27822322026)
+**WhatsApp Number:** [0822322026](https://wa.me/27822322026)
 
 A real person will respond to you there. Response time may vary, but usually within a few hours during business hours.
 
@@ -947,14 +947,14 @@ Would you like to fill out the complete advertising form now?`,
         role: 'assistant',
         content: `**Contact Information:**
 
-**Chatbot:** [082 232 2026](tel:0822322026)
-**Other:** [063 903 2797](tel:0639032797)
+      **Chatbot:** [0822322026](tel:0822322026)
+      **Other:** [0639032797](tel:0639032797)
 
-**WhatsApp:** [082 232 2026](https://wa.me/27822322026)
+      **WhatsApp:** [0822322026](https://wa.me/27822322026)
 
-**Email:** [mzansiprolifedevelopment@gmail.com](mailto:mzansiprolifedevelopment@gmail.com)
+      **Email:** [mzansiprolifedevelopment@gmail.com](mailto:mzansiprolifedevelopment@gmail.com)
 
-**Address:** 32 Bell Street | Caltex Building, Office No. 106, Nelspruit, 1200, South Africa`,
+      **Address:** 32 Bell Street | Caltex Building, Office No. 106, Nelspruit, 1200, South Africa`,
       };
     }
     
@@ -1030,35 +1030,32 @@ export default function ChatWidget() {
   }, [isOpen]);
 
   const initializeConversation = async () => {
-    return {
-      role: 'assistant',
-      content: `**Contact Information:**
+    try {
+      // Start by collecting the user's name and show a greeting
+      setCollectingInfo('name');
+      setMessages([
+        {
+          role: 'assistant',
+          content: `Hi 👋 Welcome to **Mzansi Prolife Development Institute**!
 
-  **Chatbot:** [082 232 2026](tel:0822322026)  
-  **Other:** [063 903 2797](tel:0639032797)  
-  **WhatsApp:** [082 232 2026](https://wa.me/27822322026)  
-  **Email:** mzansiprolifedevelopment@gmail.com
-
-  **Address:** 32 Bell Street, Caltex Building, Office No. 106, Nelspruit, 1200
-
-  Is there anything else I can help with?`,
-    };
 I'm your digital assistant 🤖. To provide you with the best assistance, I'll need a few details first.
 
-**What's your name?**`,
-      }]);
+What's your name?`,
+        },
+      ]);
     } catch (error) {
       console.error('Failed to initialize conversation:', error);
-      // Fallback: still show greeting
       setCollectingInfo('name');
-      setMessages([{
-        role: 'assistant',
-        content: `Hi 👋 Welcome to **Mzansi Prolife Development Institute**!
+      setMessages([
+        {
+          role: 'assistant',
+          content: `Hi 👋 Welcome to **Mzansi Prolife Development Institute**!
 
 I'm your digital assistant 🤖. To provide you with the best assistance, I'll need a few details first.
 
-**What's your name?**`,
-      }]);
+What's your name?`,
+        },
+      ]);
     }
   };
 

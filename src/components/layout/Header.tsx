@@ -60,7 +60,7 @@ export default function Header() {
           <div className="flex items-center gap-6">
             <a href="tel:0822322026" className="flex items-center gap-1.5 hover:text-green-200 transition-colors">
               <Phone className="w-3.5 h-3.5" />
-              082 232 2026
+              0822322026
             </a>
             <a href="mailto:mzansiprolifedevelopment@gmail.com" className="flex items-center gap-1.5 hover:text-green-200 transition-colors">
               <Mail className="w-3.5 h-3.5" />
