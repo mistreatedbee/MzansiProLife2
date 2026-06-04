@@ -167,8 +167,8 @@ pnpm preview
 ## Contact
 
 - **Email**: mzansiprolifedevelopment@gmail.com
-- **Phone**: 082 232 2026 (Chatbot)
-- **Other**: 063 903 2797
+- **Phone**: 0822322026 (Chatbot)
+- **Other**: 0639032797
 
 ## Banking Details
 

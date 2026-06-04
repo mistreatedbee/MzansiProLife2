@@ -21,8 +21,8 @@ export default function Contact() {
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const phoneNumbers = [
-    { label: 'Chatbot', number: '082 232 2026', color: 'bg-green-50 text-green-600 border-green-100' },
-    { label: 'Other', number: '063 903 2797', color: 'bg-gray-50 text-gray-700 border-gray-100' },
+    { label: 'Chatbot', number: '0822322026', color: 'bg-green-50 text-green-600 border-green-100' },
+    { label: 'Other', number: '0639032797', color: 'bg-gray-50 text-gray-700 border-gray-100' },
   ];
 
   const copyToClipboard = (text: string) => {
@@ -106,7 +106,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">WhatsApp</p>
-                        <p className="font-bold text-xl text-green-600">082 232 2026</p>
+                        <p className="font-bold text-xl text-green-600">0822322026</p>
                       </div>
                     </div>
                     <ExternalLink className="w-5 h-5 text-green-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

@@ -162,8 +162,8 @@ export default function Privacy() {
                 </p>
                 <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
                   <li>Email: mzansiprolifedevelopment@gmail.com</li>
-                  <li>Chatbot: 082 232 2026</li>
-                  <li>Other: 063 903 2797</li>
+                  <li>Chatbot: 0822322026</li>
+                  <li>Other: 0639032797</li>
                   <li>Address: 32 Bell Street | Caltex Building, Office No. 106, Nelspruit, 1200, South Africa</li>
                   <li>Information Regulator: complaints.IR@justice.gov.za</li>
                 </ul>

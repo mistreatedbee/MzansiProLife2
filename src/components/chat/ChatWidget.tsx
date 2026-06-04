@@ -616,9 +616,9 @@ Please type your question or comment, and I'll do my best to help.`,
           role: 'assistant',
           content: `**Contact Information:**
 
-**Chatbot:** [082 232 2026](tel:0822322026)  
-**Other:** [063 903 2797](tel:0639032797)  
-**WhatsApp:** [082 232 2026](https://wa.me/27822322026)  
+**Chatbot:** [0822322026](tel:0822322026)  
+**Other:** [0639032797](tel:0639032797)  
+**WhatsApp:** [0822322026](https://wa.me/27822322026)  
 **Email:** mzansiprolifedevelopment@gmail.com
 
 **Address:** 32 Bell Street, Caltex Building, Office No. 106, Nelspruit, 1200

@@ -206,7 +206,7 @@ export default function SLCAInvitation() {
                     <MessageCircle className="w-6 h-6" />
                     <div>
                       <p className="text-sm text-green-100">WhatsApp</p>
-                      <p className="font-semibold">082 232 2026</p>
+                      <p className="font-semibold">0822322026</p>
                     </div>
                   </a>
                   <a href="mailto:mzansiprolifedevelopmentinstitute@gmail.com" className="flex items-center gap-4 bg-white/10 rounded-2xl p-4 hover:bg-white/15 transition-colors">

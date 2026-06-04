@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export default function ContactSection() {
   const phoneNumbers = [
-    { label: 'Chatbot', number: '082 232 2026', color: 'bg-green-50 text-green-600' },
+    { label: 'Chatbot', number: '0822322026', color: 'bg-green-50 text-green-600' },
     { label: 'Other', number: '063 903 2797', color: 'bg-gray-50 text-gray-700' },
   ];
 
@@ -61,7 +61,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">WhatsApp</p>
-                    <p className="font-semibold text-gray-800">082 232 2026</p>
+                    <p className="font-semibold text-gray-800">0822322026</p>
                   </div>
                 </div>
               </a>
