@@ -17,16 +17,10 @@ import Privacy from '../Pages/Privacy'
 import SLCAInvitation from '../Pages/SLCAInvitation'
 import SLCAPoster from '../Pages/SLCAPoster'
 import NotFound from '../Pages/NotFound'
-import WebsiteLock from './components/WebsiteLock'
-import { isWebsiteLocked } from './config/website'
 
 function App() {
   const location = useLocation()
 
-  if (isWebsiteLocked()) {
-    return <WebsiteLock />
-  }
-  
   // Get current page name from pathname
   const getPageName = (pathname: string): string => {
     if (pathname === '/') return 'Home'
