@@ -18,12 +18,12 @@ import SLCAInvitation from '../Pages/SLCAInvitation'
 import SLCAPoster from '../Pages/SLCAPoster'
 import NotFound from '../Pages/NotFound'
 import WebsiteLock from './components/WebsiteLock'
-import { WEBSITE_LOCKED } from './config/website'
+import { isWebsiteLocked } from './config/website'
 
 function App() {
   const location = useLocation()
 
-  if (WEBSITE_LOCKED) {
+  if (isWebsiteLocked()) {
     return <WebsiteLock />
   }
   

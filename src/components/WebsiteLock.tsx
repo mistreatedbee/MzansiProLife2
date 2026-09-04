@@ -1,9 +1,33 @@
 import { LockKeyhole, Mail, Phone } from 'lucide-react'
+import { useCallback } from 'react'
 
 const supportEmail = 'mzansiprolifedevelopment@gmail.com'
 const supportPhone = '0822322026'
 
 export default function WebsiteLock() {
+  const isAdmin = typeof window !== 'undefined' && localStorage.getItem('admin_authenticated') === 'true'
+
+  const unlockFor20Days = useCallback(() => {
+    if (typeof window === 'undefined') return
+    localStorage.setItem('site_unlocked_at', Date.now().toString())
+    localStorage.setItem('site_paid', 'false')
+    window.location.reload()
+  }, [])
+
+  const markAsPaid = useCallback(() => {
+    if (typeof window === 'undefined') return
+    localStorage.setItem('site_paid', 'true')
+    localStorage.removeItem('site_unlocked_at')
+    window.location.reload()
+  }, [])
+
+  const lockNow = useCallback(() => {
+    if (typeof window === 'undefined') return
+    localStorage.removeItem('site_paid')
+    localStorage.removeItem('site_unlocked_at')
+    window.location.reload()
+  }, [])
+
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-green-950 via-green-900 to-emerald-800 px-5 py-10 text-slate-900 sm:px-8">
       <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-emerald-400/15 blur-3xl" aria-hidden="true" />
@@ -57,6 +81,29 @@ export default function WebsiteLock() {
               {supportPhone}
             </a>
           </div>
+
+          {isAdmin && (
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={unlockFor20Days}
+                className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              >
+                Unlock 20 days
+              </button>
+              <button
+                onClick={markAsPaid}
+                className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              >
+                Mark as Paid
+              </button>
+              <button
+                onClick={lockNow}
+                className="inline-flex items-center gap-2 rounded-full border border-red-300 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-300"
+              >
+                Lock Now
+              </button>
+            </div>
+          )}
 
           <p className="mt-8 text-xs text-slate-400">
             Support: {supportEmail}
